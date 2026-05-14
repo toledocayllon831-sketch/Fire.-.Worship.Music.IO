@@ -1,654 +1,955 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fire & Worship Music</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;700&family=Roboto&display=swap" rel="stylesheet">
+<title>Fire & Worship Music App</title>
 
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<!-- GOOGLE FONTS -->
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
 
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+<!-- FONT AWESOME -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
-        :root {
-            --primary: #081c3b;
-            --secondary: #ffeb3b;
-            --white: #fff;
-            --brasil-verde: #009739;
-            --brasil-amarelo: #ffcc00;
-            --brasil-azul: #002776;
-        }
+<style>
 
-        body {
-            font-family: 'Roboto', sans-serif;
-            background: #f4f4f4;
-            color: var(--primary);
-            overflow-x: hidden;
-        }
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+}
 
-        /* MENU */
-        nav {
-            background: var(--white);
-            display: flex;
-            justify-content: space-between;
-            padding: 15px 10%;
-            border-bottom: 4px solid var(--primary);
-            position: sticky;
-            top: 0;
-            z-index: 10;
-        }
+:root{
+--bg:#050816;
+--card:rgba(12,19,45,0.75);
+--glass:rgba(255,255,255,0.08);
+--primary:#00e1ff;
+--secondary:#ffe600;
+--green:#00ff8c;
+--text:#ffffff;
+--shadow:0 0 25px rgba(0,225,255,0.3);
+}
 
-        .logo {
-            font-family: 'Oswald', sans-serif;
-            font-size: 1.5rem;
-            text-transform: uppercase;
-        }
+body{
+font-family:'Poppins',sans-serif;
+background:
+radial-gradient(circle at top, rgba(0,255,255,0.08), transparent 30%),
+radial-gradient(circle at bottom, rgba(255,255,0,0.08), transparent 30%),
+#050816;
+color:var(--text);
+overflow-x:hidden;
+min-height:100vh;
+}
 
-        nav ul {
-            display: flex;
-            list-style: none;
-        }
+/* FUNDO ESPACIAL */
+.stars{
+position:fixed;
+width:100%;
+height:100%;
+overflow:hidden;
+z-index:-2;
+}
 
-        nav ul li {
-            margin-left: 20px;
-        }
+.star{
+position:absolute;
+width:2px;
+height:2px;
+background:white;
+border-radius:50%;
+animation:twinkle 4s infinite;
+}
 
-        nav ul li a {
-            text-decoration: none;
-            color: var(--primary);
-            font-weight: bold;
-            text-transform: uppercase;
-            font-size: 0.8rem;
-        }
+@keyframes twinkle{
+0%{opacity:0.2;transform:scale(1);}
+50%{opacity:1;transform:scale(1.8);}
+100%{opacity:0.2;transform:scale(1);}
+}
 
-        /* HERO */
-        .hero {
-            height: 60vh;
-            background:
-                linear-gradient(rgba(8, 28, 59, 0.8), rgba(8, 28, 59, 0.8)),
-                url('https://images.unsplash.com/photo-1506157786151-b8491531f063');
+/* NEBULOSA */
+.nebula{
+position:fixed;
+width:700px;
+height:700px;
+border-radius:50%;
+background:radial-gradient(circle, rgba(0,225,255,0.12), transparent 70%);
+filter:blur(50px);
+z-index:-1;
+animation:moveNebula 20s infinite alternate ease-in-out;
+}
 
-            background-size: cover;
-            background-position: center;
+.nebula2{
+top:40%;
+right:-200px;
+background:radial-gradient(circle, rgba(255,230,0,0.08), transparent 70%);
+animation-duration:25s;
+}
 
-            display: flex;
-            justify-content: center;
-            align-items: center;
+@keyframes moveNebula{
+from{
+transform:translateY(-20px) translateX(0px);
+}
+to{
+transform:translateY(40px) translateX(50px);
+}
+}
 
-            color: white;
-            text-align: center;
-        }
+/* HEADER */
+.top-app{
+position:sticky;
+top:0;
+z-index:999;
+backdrop-filter:blur(15px);
+background:rgba(0,0,0,0.5);
+border-bottom:1px solid rgba(255,255,255,0.1);
+padding:15px 20px;
+}
 
-        .hero h1 {
-            font-family: 'Oswald', sans-serif;
-            font-size: 3.5rem;
-            margin-bottom: 10px;
-        }
+.top-flex{
+display:flex;
+justify-content:space-between;
+align-items:center;
+}
 
-        .hero p {
-            font-size: 1.2rem;
-        }
+.app-logo{
+display:flex;
+align-items:center;
+gap:10px;
+}
 
-        /* BADGE */
-        .copa-badge {
-            background: var(--secondary);
-            color: black;
-            padding: 4px 12px;
-            font-weight: bold;
-            margin-bottom: 10px;
-            display: inline-block;
-        }
+.logo-icon{
+width:45px;
+height:45px;
+border-radius:14px;
+background:linear-gradient(135deg,#00e1ff,#00ff8c);
+display:flex;
+justify-content:center;
+align-items:center;
+font-size:22px;
+color:black;
+box-shadow:var(--shadow);
+}
 
-        /* CONTAINER */
-        .container {
-            padding: 40px 10%;
-        }
+.app-logo h1{
+font-size:18px;
+font-family:'Orbitron',sans-serif;
+}
 
-        /* GRID */
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
-            margin-top: 20px;
-        }
+.top-icons{
+display:flex;
+gap:15px;
+}
 
-        .card {
-            background: white;
-            border-radius: 12px;
-            overflow: hidden;
-            transition: 0.3s;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-        }
+.top-icons i{
+font-size:20px;
+cursor:pointer;
+transition:0.3s;
+}
 
-        .card:hover {
-            transform: translateY(-5px);
-        }
+.top-icons i:hover{
+color:var(--primary);
+transform:scale(1.1);
+}
 
-        /* IMAGEM */
-        .card img {
-            width: 100%;
-            height: auto;
-            max-height: 500px;
-            object-fit: contain;
-            display: block;
-        }
+/* HERO */
+.hero{
+padding:40px 20px;
+}
 
-        .card-content {
-            padding: 15px;
-        }
+.hero-card{
+background:rgba(255,255,255,0.06);
+border:1px solid rgba(255,255,255,0.08);
+border-radius:30px;
+padding:30px;
+text-align:center;
+backdrop-filter:blur(18px);
+box-shadow:var(--shadow);
+position:relative;
+overflow:hidden;
+}
 
-        /* SOCIAL */
-        .social-float-bar {
-            position: fixed;
-            right: 20px;
-            bottom: 20px;
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-            z-index: 999;
-        }
+.hero-card::before{
+content:"";
+position:absolute;
+width:300px;
+height:300px;
+background:radial-gradient(circle, rgba(0,225,255,0.15), transparent 70%);
+top:-100px;
+right:-100px;
+}
 
-        .float-item {
-            display: flex;
-            align-items: center;
-            color: #fff;
-            text-decoration: none;
-            border-radius: 50px;
-            overflow: hidden;
-            transition: 0.3s;
-        }
+.badge{
+display:inline-block;
+background:linear-gradient(45deg,#ffe600,#00ff8c);
+color:black;
+padding:8px 18px;
+border-radius:40px;
+font-weight:bold;
+margin-bottom:15px;
+}
 
-        .float-item:hover {
-            transform: scale(1.05);
-        }
+.hero h2{
+font-size:42px;
+font-family:'Orbitron',sans-serif;
+margin-bottom:10px;
+}
 
-        .icon-box {
-            width: 50px;
-            height: 50px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 22px;
-        }
+.hero p{
+opacity:0.9;
+}
 
-        .label {
-            padding: 0 15px;
-            font-weight: bold;
-        }
+/* BOLAS */
+h1::before,
+h2::before,
+h3::before,
+p::before{
+content:"⚽";
+margin-right:8px;
+display:inline-block;
+animation:spinBall 2s infinite linear;
+}
 
-        .insta {
-            background: linear-gradient(45deg,
-                    #feda75,
-                    #fa7e1e,
-                    #d62976,
-                    #962fbf,
-                    #4f5bd5);
-        }
+@keyframes spinBall{
+from{
+transform:rotate(0deg);
+}
+to{
+transform:rotate(360deg);
+}
+}
 
-        .tiktok {
-            background: #000;
-            box-shadow: 0 0 15px #25F4EE;
-        }
+/* COUNTDOWN */
+#countdown{
+margin-top:20px;
+font-size:22px;
+font-weight:bold;
+color:var(--secondary);
+}
 
-        /* COUNTDOWN */
-        #countdown {
-            font-size: 1.5rem;
-            font-weight: bold;
-            background: rgba(0, 0, 0, 0.4);
-            padding: 10px 20px;
-            border-radius: 10px;
-            display: inline-block;
-            margin-top: 15px;
-        }
+/* GRID */
+.grid{
+padding:20px;
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(160px,1fr));
+gap:18px;
+}
 
-        /* CONFETES */
-        .confete {
-            position: fixed;
-            top: -10px;
-            width: 7px;
-            height: 7px;
-            opacity: 0.9;
-            border-radius: 50%;
-            z-index: 9999;
-            animation-name: cair;
-            animation-timing-function: linear;
-            animation-iteration-count: infinite;
-        }
+.app-card{
+background:var(--card);
+border-radius:24px;
+padding:22px;
+text-align:center;
+border:1px solid rgba(255,255,255,0.08);
+backdrop-filter:blur(12px);
+transition:0.3s;
+cursor:pointer;
+position:relative;
+overflow:hidden;
+}
 
-        @keyframes cair {
-            0% {
-                transform: translateY(0) rotate(0deg);
-            }
+.app-card:hover{
+transform:translateY(-8px) scale(1.03);
+box-shadow:0 0 25px rgba(0,225,255,0.3);
+}
 
-            100% {
-                transform: translateY(100vh) rotate(360deg);
-            }
-        }
+.app-card i{
+font-size:34px;
+margin-bottom:12px;
+color:var(--primary);
+}
 
-        /* BOLA */
-        h1::before,
-        h2::before,
-        h3::before,
-        p::before {
-            content: "⚽";
-            display: inline-block;
-            margin-right: 8px;
-            animation: bounceSpin 1.5s ease-in-out infinite alternate;
-        }
+.app-card h3{
+font-size:16px;
+}
 
-        @keyframes bounceSpin {
-            0% {
-                transform: translateY(0) rotate(0deg);
-            }
+.app-card p{
+margin-top:8px;
+font-size:13px;
+opacity:0.8;
+}
 
-            50% {
-                transform: translateY(-8px) rotate(180deg);
-            }
+/* FOTO */
+.photo-card{
+margin:20px;
+background:rgba(255,255,255,0.06);
+border-radius:28px;
+overflow:hidden;
+border:1px solid rgba(255,255,255,0.08);
+}
 
-            100% {
-                transform: translateY(0) rotate(360deg);
-            }
-        }
+.photo-card img{
+width:100%;
+display:block;
+}
 
-        /* IA */
-        .ia-box {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 12px;
-            margin-top: 20px;
-            cursor: pointer;
-        }
+.photo-info{
+padding:20px;
+}
 
-        .ia-circle {
-            width: 55px;
-            height: 55px;
-            border-radius: 50%;
-            background: #081c3b;
-            color: #fff;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: bold;
-            font-size: 18px;
-            transition: 0.3s;
-        }
+/* MUSIC */
+.music-section{
+padding:20px;
+}
 
-        .ia-circle:hover {
-            transform: scale(1.1);
-        }
+.music-box{
+background:rgba(255,255,255,0.06);
+border-radius:24px;
+padding:25px;
+text-align:center;
+margin-bottom:20px;
+}
 
-        .ia-name {
-            font-weight: bold;
-            font-size: 18px;
-        }
+.music-btns{
+display:flex;
+gap:15px;
+justify-content:center;
+flex-wrap:wrap;
+margin-top:20px;
+}
 
-        @keyframes popup {
-            from {
-                transform: scale(0.7);
-                opacity: 0;
-            }
+.music-btns a{
+text-decoration:none;
+padding:12px 18px;
+border-radius:16px;
+color:white;
+font-weight:bold;
+transition:0.3s;
+}
 
-            to {
-                transform: scale(1);
-                opacity: 1;
-            }
-        }
+.spotify{
+background:#1DB954;
+}
 
-        @media(max-width:768px) {
-            .label {
-                display: none;
-            }
-        }
-    </style>
+.youtube{
+background:#ff0000;
+}
+
+.instagram{
+background:linear-gradient(45deg,#feda75,#d62976,#4f5bd5);
+}
+
+.music-btns a:hover{
+transform:scale(1.05);
+}
+
+/* SETTINGS */
+.settings-box{
+padding:20px;
+}
+
+.select-lang{
+width:100%;
+padding:14px;
+border:none;
+border-radius:16px;
+background:rgba(255,255,255,0.08);
+color:white;
+margin-top:15px;
+font-size:15px;
+}
+
+.option-dark{
+background:#081124;
+}
+
+/* NAV */
+.bottom-nav{
+position:fixed;
+bottom:0;
+width:100%;
+background:rgba(0,0,0,0.75);
+backdrop-filter:blur(20px);
+display:flex;
+justify-content:space-around;
+padding:14px 0;
+z-index:999;
+border-top:1px solid rgba(255,255,255,0.08);
+}
+
+.bottom-nav button{
+background:transparent;
+border:none;
+color:white;
+font-size:13px;
+display:flex;
+flex-direction:column;
+align-items:center;
+gap:6px;
+cursor:pointer;
+transition:0.3s;
+}
+
+.bottom-nav button i{
+font-size:20px;
+}
+
+.bottom-nav button:hover{
+color:var(--primary);
+transform:translateY(-3px);
+}
+
+/* POPUP */
+.popup{
+position:fixed;
+inset:0;
+background:rgba(0,0,0,0.7);
+display:none;
+justify-content:center;
+align-items:center;
+z-index:99999;
+}
+
+.popup-box{
+width:90%;
+max-width:350px;
+background:#081124;
+border-radius:25px;
+padding:30px;
+text-align:center;
+border:1px solid rgba(255,255,255,0.08);
+animation:popup .3s ease;
+}
+
+.popup-box i{
+font-size:50px;
+margin-bottom:15px;
+color:var(--primary);
+}
+
+.popup-box h3{
+margin-bottom:10px;
+}
+
+.popup-box button{
+margin-top:20px;
+border:none;
+padding:12px 20px;
+border-radius:15px;
+background:linear-gradient(45deg,#00e1ff,#00ff8c);
+font-weight:bold;
+cursor:pointer;
+}
+
+@keyframes popup{
+from{
+transform:scale(.7);
+opacity:0;
+}
+to{
+transform:scale(1);
+opacity:1;
+}
+}
+
+.page{
+display:none;
+}
+
+.page.active{
+display:block;
+}
+
+@media(max-width:768px){
+
+.hero h2{
+font-size:30px;
+}
+
+}
+
+</style>
 </head>
 
 <body>
 
-    <!-- MENU -->
-    <nav>
+<!-- ESTRELAS -->
+<div class="stars" id="stars"></div>
 
-        <div class="logo">
-            Fire & Worship Music
-        </div>
+<div class="nebula"></div>
+<div class="nebula nebula2"></div>
 
-        <ul>
+<!-- HEADER -->
+<header class="top-app">
 
-            <li>
-                <a href="#">
-                    Início
-                </a>
-            </li>
+<div class="top-flex">
 
-            <li>
-                <a href="https://open.spotify.com/user/3177rzp64hxkarxitbswefevw4ta?si=s0rcXCp7SjiErCtQg-QMWA"
-                    target="_blank">
-                    Ouça Agora
-                </a>
-            </li>
+<div class="app-logo">
 
-        </ul>
+<div class="logo-icon">
+🔥
+</div>
 
-    </nav>
+<h1>
+Fire & Worship
+</h1>
 
-    <!-- HERO -->
-    <header class="hero">
+</div>
 
-        <div>
+<div class="top-icons">
 
-            <span class="copa-badge">
-                COPA 2026 - RUMO AO HEXA!
-            </span>
+<i class="fa-solid fa-globe"></i>
 
-            <h1>
-                Vai Brasil! 🇧🇷🔥
-            </h1>
+<a href="https://www.instagram.com/fire.worship.music.ofc" target="_blank" style="color:white;">
+<i class="fa-brands fa-instagram"></i>
+</a>
 
-            <p>
-                Estamos juntos, torcendo pelo hexa!
-            </p>
+</div>
 
-            <div id="countdown"></div>
+</div>
 
-        </div>
+</header>
 
-    </header>
+<!-- HERO -->
+<section class="hero">
 
-    <!-- MAIN -->
-    <main class="container">
+<div class="hero-card">
 
-        <!-- SOBRE -->
-        <section style="margin-bottom:50px; text-align:center;">
+<div class="badge" id="badgeText">
+COPA 2026 • RUMO AO HEXA 🇧🇷
+</div>
 
-            <h2>Nossa Missão</h2>
+<h2 id="heroTitle">
+Fire & Worship
+</h2>
 
-            <p>
-                Somos uma banda gospel dedicada
-                a manifestar a glória de Deus.
-            </p>
+<p id="heroDesc">
+App oficial da banda gospel Fire & Worship Music
+</p>
 
-            <p>
-                Nosso propósito é levar vidas até Cristo.
-            </p>
+<div id="countdown"></div>
 
-            <p style="font-weight:bold; color:#081c3b;">
-                📖 “Ide por todo o mundo e pregai o evangelho.”
-            </p>
+</div>
 
-        </section>
+</section>
 
-        <!-- ÚLTIMOS MOMENTOS -->
-        <h2>Últimos Momentos</h2>
+<!-- HOME -->
+<section class="page active" id="home">
 
-        <div class="grid">
+<div class="grid">
 
-            <div class="card">
+<div class="app-card" onclick="openPopup()">
+<i class="fa-solid fa-robot"></i>
+<h3 id="iaText">IA.lolo</h3>
+<p id="iaSub">Em desenvolvimento</p>
+</div>
 
-                <img src="imagem/IMG_2026.jpg.jpeg" alt="Show">
+<div class="app-card" onclick="openPopup()">
+<i class="fa-solid fa-comments"></i>
+<h3 id="commentsText">Comentários</h3>
+<p id="commentsSub">Sistema bloqueado</p>
+</div>
 
-                <div class="card-content">
+<div class="app-card" onclick="openPopup()">
+<i class="fa-solid fa-calendar"></i>
+<h3 id="meetingText">Reuniões</h3>
+<p id="meetingSub">Agendamentos beta</p>
+</div>
 
-                    <p>
-                        Momentos especiais da banda.
-                    </p>
-
-                </div>
-
-            </div>
-
-        </div>
+<div class="app-card" onclick="openPopup()">
+<i class="fa-solid fa-ticket"></i>
+<h3 id="ticketText">Ingressos</h3>
+<p id="ticketSub">Em breve</p>
+</div>
 
-    </main>
+<div class="app-card" onclick="openPopup()">
+<i class="fa-solid fa-user"></i>
+<h3 id="profileText">Perfil</h3>
+<p id="profileSub">Login indisponível</p>
+</div>
 
-    <!-- COMENTÁRIOS -->
-    <section class="comments-section"
-        style="padding:60px 10%; text-align:center; background:#fff;">
+<div class="app-card" onclick="showPage('settings')">
+<i class="fa-solid fa-gear"></i>
+<h3 id="configText">Configurações</h3>
+<p id="configSub">Idiomas e sistema</p>
+</div>
 
-        <h2>💬 Comentários</h2>
+</div>
 
-        <p>Em desenvolvimento</p>
-
-        <!-- IA -->
-        <div class="ia-box" onclick="abrirIA()">
-
-            <div class="ia-circle">
-                IA
-            </div>
-
-            <span class="ia-name">
-                IA.lolo
-            </span>
-
-        </div>
-
-        <textarea disabled style="
-        width:100%;
-        height:120px;
-        margin-top:20px;
-        border-radius:10px;
-        padding:15px;
-        border:2px solid #081c3b;
-        resize:none;
-        font-size:15px;
-        ">Sistema de comentários bloqueado
-        </textarea>
-
-    </section>
-
-    <!-- POPUP IA -->
-    <div id="iaPopup" style="
-    display:none;
-    position:fixed;
-    top:0;
-    left:0;
-    width:100%;
-    height:100%;
-    background:rgba(0,0,0,0.7);
-    z-index:99999;
-    justify-content:center;
-    align-items:center;
-    ">
-
-        <div style="
-        background:#fff;
-        width:320px;
-        padding:30px;
-        border-radius:20px;
-        text-align:center;
-        animation:popup 0.3s ease;
-        ">
-
-            <div style="
-            width:70px;
-            height:70px;
-            background:#081c3b;
-            border-radius:50%;
-            margin:auto;
-            display:flex;
-            align-items:center;
-            justify-content:center;
-            color:#fff;
-            font-size:22px;
-            font-weight:bold;
-            margin-bottom:15px;
-            ">
-                IA
-            </div>
-
-            <h3>IA.lolo</h3>
-
-            <p style="margin-top:10px;">
-                IA desativada 🚧<br>
-                Em desenvolvimento.
-            </p>
-
-            <button onclick="fecharIA()" style="
-            margin-top:20px;
-            padding:10px 20px;
-            border:none;
-            background:#081c3b;
-            color:#fff;
-            border-radius:10px;
-            cursor:pointer;
-            font-weight:bold;
-            ">
-                Fechar
-            </button>
-
-        </div>
-
-    </div>
-
-    <!-- SOCIAL -->
-    <div class="social-float-bar">
-
-        <a href="https://www.instagram.com/fire.worship.music.ofc"
-            target="_blank"
-            class="float-item insta">
-
-            <div class="icon-box">
-                <i class="fa-brands fa-instagram"></i>
-            </div>
-
-            <span class="label">
-                Instagram
-            </span>
-
-        </a>
-
-        <a href="https://www.tiktok.com/@fire.worship.music.ofc"
-            target="_blank"
-            class="float-item tiktok">
-
-            <div class="icon-box">
-                <i class="fa-brands fa-tiktok"></i>
-            </div>
-
-            <span class="label">
-                TikTok
-            </span>
-
-        </a>
-
-    </div>
-
-    <!-- RODAPÉ -->
-    <footer class="site-footer"
-        style="text-align:center; padding:40px 0; background:#081c3b; color:#fff;">
-
-        <p>
-            Desenvolvido por
-            <a href="" style="color:#ffeb3b;">
-                Matheus Henrique
-            </a>
-            e
-            <a href="" style="color:#ffeb3b;">
-                Jorge Toledo
-            </a>
-        </p>
-
-        <p>
-            © 2026 Fire & Worship Music
-        </p>
-
-    </footer>
-
-    <!-- SCRIPT -->
-    <script>
-
-        // CONFETES
-        for (let i = 0; i < 30; i++) {
-
-            const conf = document.createElement('div');
-
-            conf.className = 'confete';
-
-            conf.style.left =
-                Math.random() * 100 + 'vw';
-
-            conf.style.width =
-                conf.style.height =
-                (Math.random() * 8 + 5) + 'px';
-
-            conf.style.background =
-                ['#ffcc00', '#009739', '#002776']
-                [Math.floor(Math.random() * 3)];
-
-            conf.style.animationDuration =
-                (Math.random() * 5 + 3) + 's';
-
-            document.body.appendChild(conf);
-        }
-
-        // COUNTDOWN
-        const countdownEl =
-            document.getElementById('countdown');
-
-        const gameDate =
-            new Date('June 13, 2026 19:00:00').getTime();
-
-        function updateCountdown() {
-
-            const now = new Date().getTime();
-
-            const distance = gameDate - now;
-
-            if (distance < 0) {
-
-                countdownEl.innerHTML =
-                    "🇧🇷 O JOGO COMEÇOU!";
-
-                clearInterval(countdownInterval);
-
-                return;
-            }
-
-            const days =
-                Math.floor(distance / (1000 * 60 * 60 * 24));
-
-            const hours =
-                Math.floor((distance %
-                    (1000 * 60 * 60 * 24)) /
-                    (1000 * 60 * 60));
-
-            const minutes =
-                Math.floor((distance %
-                    (1000 * 60 * 60)) /
-                    (1000 * 60));
-
-            const seconds =
-                Math.floor((distance %
-                    (1000 * 60)) / 1000);
-
-            countdownEl.innerHTML =
-                `${days}d ${hours}h ${minutes}m ${seconds}s`;
-        }
-
-        const countdownInterval =
-            setInterval(updateCountdown, 1000);
-
-        updateCountdown();
-
-        // IA
-        function abrirIA() {
-            document.getElementById("iaPopup").style.display = "flex";
-        }
-
-        function fecharIA() {
-            document.getElementById("iaPopup").style.display = "none";
-        }
-
-    </script>
+<!-- FOTO -->
+<div class="photo-card">
+
+<img src="imagem/IMG_2026.jpg.jpeg" alt="Show">
+
+<div class="photo-info">
+
+<h3 id="momentsTitle">
+Últimos Momentos
+</h3>
+
+<p id="momentsDesc">
+Momentos especiais da Fire & Worship Music.
+</p>
+
+</div>
+
+</div>
+
+<!-- NOSSA VISÃO -->
+<div class="music-section">
+
+<div class="music-box">
+
+<h3 id="visionTitle">
+Nossa Visão
+</h3>
+
+<p id="visionText" style="margin-top:15px; line-height:1.8;">
+
+Levar a presença de Deus através da música,
+impactando vidas no Brasil e no mundo.
+
+<br><br>
+
+Unir adoração, criatividade,
+tecnologia e evangelismo em uma experiência
+moderna e inspiradora.
+
+</p>
+
+</div>
+
+</div>
+
+<!-- MÚSICAS -->
+<div class="music-section">
+
+<div class="music-box">
+
+<h3 id="musicTitle">
+Plataformas Oficiais
+</h3>
+
+<div class="music-btns">
+
+<a href="https://open.spotify.com/user/3177rzp64hxkarxitbswefevw4ta?si=s0rcXCp7SjiErCtQg-QMWA"
+target="_blank"
+class="spotify">
+
+<i class="fa-brands fa-spotify"></i>
+Spotify
+
+</a>
+
+<a href="https://youtube.com"
+target="_blank"
+class="youtube">
+
+<i class="fa-brands fa-youtube"></i>
+YouTube
+
+</a>
+
+<a href="https://www.instagram.com/fire.worship.music.ofc"
+target="_blank"
+class="instagram">
+
+<i class="fa-brands fa-instagram"></i>
+Instagram
+
+</a>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- CONFIG -->
+<section class="page" id="settings">
+
+<div class="settings-box">
+
+<div class="music-box">
+
+<h3 id="langTitle">
+Idioma do Aplicativo
+</h3>
+
+<select class="select-lang option-dark" onchange="changeLanguage(this.value)">
+
+<option value="pt">
+Português
+</option>
+
+<option value="en">
+English
+</option>
+
+<option value="es">
+Español
+</option>
+
+</select>
+
+<p style="margin-top:20px;" id="langDesc">
+Todo o aplicativo será traduzido automaticamente.
+</p>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- POPUP -->
+<div class="popup" id="popup">
+
+<div class="popup-box">
+
+<i class="fa-solid fa-lock"></i>
+
+<h3 id="popupTitle">
+Recurso em Desenvolvimento
+</h3>
+
+<p id="popupText">
+Esta função ainda não está disponível.
+</p>
+
+<button onclick="closePopup()" id="closeBtn">
+Fechar
+</button>
+
+</div>
+
+</div>
+
+<!-- NAV -->
+<div class="bottom-nav">
+
+<button onclick="showPage('home')">
+<i class="fa-solid fa-house"></i>
+Home
+</button>
+
+<button onclick="openPopup()">
+<i class="fa-solid fa-robot"></i>
+IA
+</button>
+
+<button onclick="openPopup()">
+<i class="fa-solid fa-calendar"></i>
+Meet
+</button>
+
+<button onclick="showPage('settings')">
+<i class="fa-solid fa-gear"></i>
+Config
+</button>
+
+</div>
+
+<script>
+
+/* ESTRELAS */
+const stars = document.getElementById("stars");
+
+for(let i=0;i<180;i++){
+
+const star = document.createElement("div");
+
+star.classList.add("star");
+
+star.style.left = Math.random()*100+"%";
+
+star.style.top = Math.random()*100+"%";
+
+star.style.animationDuration =
+(Math.random()*4+2)+"s";
+
+stars.appendChild(star);
+
+}
+
+/* COUNTDOWN */
+const countdownEl =
+document.getElementById("countdown");
+
+const gameDate =
+new Date('June 13, 2026 19:00:00').getTime();
+
+function updateCountdown(){
+
+const now = new Date().getTime();
+
+const distance = gameDate - now;
+
+const days =
+Math.floor(distance/(1000*60*60*24));
+
+const hours =
+Math.floor((distance%
+(1000*60*60*24))/
+(1000*60*60));
+
+const minutes =
+Math.floor((distance%
+(1000*60*60))/
+(1000*60));
+
+const seconds =
+Math.floor((distance%
+(1000*60))/1000);
+
+countdownEl.innerHTML =
+`${days}d ${hours}h ${minutes}m ${seconds}s`;
+
+}
+
+setInterval(updateCountdown,1000);
+
+updateCountdown();
+
+/* PÁGINAS */
+function showPage(id){
+
+document.querySelectorAll('.page')
+.forEach(page=>{
+
+page.classList.remove('active');
+
+});
+
+document.getElementById(id)
+.classList.add('active');
+
+}
+
+/* POPUP */
+function openPopup(){
+
+document.getElementById("popup")
+.style.display="flex";
+
+}
+
+function closePopup(){
+
+document.getElementById("popup")
+.style.display="none";
+
+}
+
+/* IDIOMAS */
+const translations = {
+
+pt:{
+heroDesc:"App oficial da banda gospel Fire & Worship Music",
+iaText:"IA.lolo",
+iaSub:"Em desenvolvimento",
+commentsText:"Comentários",
+commentsSub:"Sistema bloqueado",
+meetingText:"Reuniões",
+meetingSub:"Agendamentos beta",
+ticketText:"Ingressos",
+ticketSub:"Em breve",
+profileText:"Perfil",
+profileSub:"Login indisponível",
+configText:"Configurações",
+configSub:"Idiomas e sistema",
+momentsTitle:"Últimos Momentos",
+momentsDesc:"Momentos especiais da Fire & Worship Music.",
+musicTitle:"Plataformas Oficiais",
+langTitle:"Idioma do Aplicativo",
+langDesc:"Todo o aplicativo será traduzido automaticamente.",
+popupTitle:"Recurso em Desenvolvimento",
+popupText:"Esta função ainda não está disponível.",
+closeBtn:"Fechar",
+visionTitle:"Nossa Visão",
+visionText:"Levar a presença de Deus através da música, impactando vidas no Brasil e no mundo.<br><br>Unir adoração, criatividade, tecnologia e evangelismo em uma experiência moderna e inspiradora."
+},
+
+en:{
+heroDesc:"Official app of Fire & Worship Music",
+iaText:"AI.lolo",
+iaSub:"Under development",
+commentsText:"Comments",
+commentsSub:"System locked",
+meetingText:"Meetings",
+meetingSub:"Beta schedules",
+ticketText:"Tickets",
+ticketSub:"Coming soon",
+profileText:"Profile",
+profileSub:"Login unavailable",
+configText:"Settings",
+configSub:"Languages and system",
+momentsTitle:"Latest Moments",
+momentsDesc:"Special moments from Fire & Worship Music.",
+musicTitle:"Official Platforms",
+langTitle:"Application Language",
+langDesc:"The entire application will be translated automatically.",
+popupTitle:"Feature Under Development",
+popupText:"This feature is not available yet.",
+closeBtn:"Close",
+visionTitle:"Our Vision",
+visionText:"Bring God's presence through music, impacting lives in Brazil and around the world.<br><br>Unite worship, creativity, technology and evangelism in a modern and inspiring experience."
+},
+
+es:{
+heroDesc:"Aplicación oficial de Fire & Worship Music",
+iaText:"IA.lolo",
+iaSub:"En desarrollo",
+commentsText:"Comentarios",
+commentsSub:"Sistema bloqueado",
+meetingText:"Reuniones",
+meetingSub:"Agenda beta",
+ticketText:"Entradas",
+ticketSub:"Próximamente",
+profileText:"Perfil",
+profileSub:"Inicio no disponible",
+configText:"Configuraciones",
+configSub:"Idiomas y sistema",
+momentsTitle:"Últimos Momentos",
+momentsDesc:"Momentos especiales de Fire & Worship Music.",
+musicTitle:"Plataformas Oficiales",
+langTitle:"Idioma de la Aplicación",
+langDesc:"Toda la aplicación será traducida automáticamente.",
+popupTitle:"Función en Desarrollo",
+popupText:"Esta función aún no está disponible.",
+closeBtn:"Cerrar",
+visionTitle:"Nuestra Visión",
+visionText:"Llevar la presencia de Dios a través de la música, impactando vidas en Brasil y el mundo.<br><br>Unir adoración, creatividad, tecnología y evangelismo en una experiencia moderna e inspiradora."
+}
+
+};
+
+function changeLanguage(lang){
+
+const t = translations[lang];
+
+for(let key in t){
+
+document.getElementById(key).innerHTML = t[key];
+
+}
+
+}
+
+</script>
+
+ <!-- RODAPÉ -->
+ <footer class="site-footer"
+ style="text-align:center; padding:40px 0; background:#081c3b; color:#fff;">
+
+ <p>
+     Desenvolvido por
+     <a href="" style="color:#ffeb3b;">
+         Matheus Henrique
+     </a>
+     e
+     <a href="" style="color:#ffeb3b;">
+         Jorge Toledo
+     </a>
+ </p>
+
+ <p>
+     © 2026 Fire & Worship Music
+ </p>
+
+</footer>
 
 </body>
-
 </html>
